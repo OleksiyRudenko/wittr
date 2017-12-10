@@ -153,3 +153,5 @@ IndexController.prototype._onSocketMessage = function(data) {
 
   this._postsView.addPosts(messages);
 };
+
+// switch for task-show-stored branch
