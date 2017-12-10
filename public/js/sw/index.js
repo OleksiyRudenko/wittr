@@ -70,6 +70,7 @@ function servePhoto(request) {
   // to the browser.
   //
   // HINT: cache.put supports a plain url as the first parameter
+  // OR: not really works in Dec 2017
   caches.open(contentImgsCache).then(function(cache){
     return cache.match(storageUrl).then(function(response){
       if (response) return response;
@@ -87,3 +88,5 @@ self.addEventListener('message', function(event) {
     self.skipWaiting();
   }
 });
+
+// advance to task-clean-photos branch
