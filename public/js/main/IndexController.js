@@ -180,3 +180,5 @@ IndexController.prototype._onSocketMessage = function(data) {
 
   this._postsView.addPosts(messages);
 };
+
+// proceed to task-clean-db branch
