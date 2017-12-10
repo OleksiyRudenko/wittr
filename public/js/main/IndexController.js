@@ -169,7 +169,22 @@ IndexController.prototype._onSocketMessage = function(data) {
     // Hint: you can use .openCursor(null, 'prev') to
     // open a cursor that goes through an index/store
     // backwards.
-  });
+    var bydateIndex = store.index('by-date');
+    bydateIndex.openCursor(null, 'prev').then(function(cursor){
+      return cursor.advance(30);
+    }).then(function deleteRest(cursor) {
+      if (!cursor) return;
+      cursor.delete();
+      return cursor.continue().then(deleteRest);
+    });
+  }); /*.then(function(cursor){
+    if (!cursor) return;
+    return cursor.advance(30);
+  }).then(function(cursor){
+    if (!cursor) return;
+    // remove remaining entries
+
+  }); */
 
   this._postsView.addPosts(messages);
 };
