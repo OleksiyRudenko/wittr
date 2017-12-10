@@ -188,3 +188,5 @@ IndexController.prototype._onSocketMessage = function(data) {
 
   this._postsView.addPosts(messages);
 };
+
+// advance to task-cache-photos branch
