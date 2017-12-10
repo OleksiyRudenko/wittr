@@ -1,4 +1,4 @@
-var staticCacheName = 'wittr-static-v7';
+var staticCacheName = 'wittr-static-v8';
 var contentImgsCache = 'wittr-content-imgs';
 var allCaches = [
   staticCacheName,
@@ -70,6 +70,16 @@ function servePhoto(request) {
   // to the browser.
   //
   // HINT: cache.put supports a plain url as the first parameter
+  caches.open(contentImgsCache).then(function(cache){
+    return cache.match(storageUrl).then(function(response){
+      if (response) return response;
+      // otherwise fetch from the network
+      return fetch(request).then(function(networkResponse){
+        cache.put(storageUrl, networkResponse.clone()); // clone it to keep for returning
+        return networkResponse;
+      });
+    });
+  });
 }
 
 self.addEventListener('message', function(event) {
